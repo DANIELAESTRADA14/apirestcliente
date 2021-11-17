@@ -1,0 +1,8 @@
+.fondo {
+    background: rgb(122,204,167);
+    background: linear-gradient(352deg, rgba(122,204,167,1) 13%, rgba(136,228,198,1) 43%, rgba(68,181,231,1) 85%);
+}
+
+.bg-dark{
+    background-color: transparent !important;
+}
