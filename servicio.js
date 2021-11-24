@@ -1,16 +1,13 @@
 //CLIENTE (VOY PARA EL RESTAURANTE)
 //RESTAURANTE=SERVIDOR DE SPOTIFY
-let uri="https://api.spotify.com/v1/artists/3YcBF2ttyueytpXtEzn1Za/top-tracks?market=us";
+let uri="http://localhost:8081/casahogar/miercoles/v1/productos";
 
-let token="Bearer BQD9qpL1WiF9IcSxPCetaiyvE1ZJh_JabLE1sDw7zF5lztAoWsZgIeBDY69Kbhg2mbATFQlPT_WUPkHqapJUwToO7gIxc0BdQ-LIAedijgqjt_tLGp-IeGw1aN-3tj63iK8uMA7vVNMITTGOSoo";
 
 let parametrosEnvio={
     method:"GET",
-    headers:{
-        Authorization:token
-    }
 }
 
+//promesa
 fetch(uri,parametrosEnvio)
 .then(function(respuesta){
     return(respuesta.json())
@@ -27,10 +24,15 @@ function pintarDatos(datos){
 
     let fila=document.getElementById("fila")
 
-    datos.tracks.forEach(function(cancion){
-        console.log(cancion.name)
-        console.log(cancion.preview_url)
-        console.log(cancion.album.images[0].url)
+    console.log(datos)
+
+        datos.forEach(function(producto){
+        console.log(producto.producto)
+        console.log(producto.fotografia)
+        console.log(producto.precio)
+        console.log(producto.descripcion)
+        console.log(producto.tipo)
+        
 
         //crear un div con js
         let columna=document.createElement("div")
@@ -40,22 +42,38 @@ function pintarDatos(datos){
         let tarjeta=document.createElement("div")
         tarjeta.classList.add("card")
         tarjeta.classList.add("h-100")
+        tarjeta.classList.add("p-3")
 
         //creo una img de tarjeta
         let imagen=document.createElement("img")
         imagen.classList.add("card-img-top")
-        imagen.src=cancion.album.images[0].url
+        imagen.classList.add("h-100")
+        imagen.src=producto.fotografia
 
-        //creo una etiquetra de audio
-        let audio=document.createElement("audio")
-        audio.classList.add("w-100")
-        audio.classList.add("mt-5")
-        audio.setAttribute("controls","controls")
-        audio.src=cancion.preview_url
+        //agrego nombre
+        let descripcion=document.createElement("h3")
+        descripcion.classList.add("fw-bold")
+        descripcion.classList.add("mt-2")
+        descripcion.classList.add("text-center")
+        descripcion.textContent=producto.producto
+
+         //agrego precio
+         let precio=document.createElement("p")
+         precio.classList.add("fw-bold")
+         precio.classList.add("mt-3")
+         precio.classList.add("text-center")
+         precio.textContent=producto.precio
+
+          //agrego descripcion
+          let texto=document.createElement("p")
+          texto.classList.add("text-center")
+          texto.textContent=producto.descripcion
 
         //PADRES E HIJOS
+        tarjeta.appendChild(descripcion)
         tarjeta.appendChild(imagen)
-        tarjeta.appendChild(audio)
+        tarjeta.appendChild(precio)
+        tarjeta.appendChild(texto)
         columna.appendChild(tarjeta)
         fila.appendChild(columna)
 
@@ -63,4 +81,4 @@ function pintarDatos(datos){
 
     })
 
-}
+} 
