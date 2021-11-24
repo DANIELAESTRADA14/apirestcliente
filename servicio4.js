@@ -21,6 +21,29 @@ function capturarDatos(){
     let dato4="descripcion="+descripcion
     let dato5="tipo="+tipo
 
-    console.log(dato1,dato2,dato3,dato4,dato5)
+    //console.log(dato1,dato2,dato3,dato4,dato5)
     
+    let parametrosPOST={
+        method:"POST",
+        headers:{
+            "Content-Type": 'application/x-www-form-urlencoded' //formato en el que van a viajar los datos
+    
+        },
+        body:dato1+"&"+dato2+"&"+dato3+"&"+dato4+"&"+dato5
+    }
+
+        fetch(uri,parametrosPOST)
+        .then(function(respuesta){
+            return(respuesta.json())
+        })
+        .then(function(respuesta){
+            console.log(respuesta)
+            alert("exito agregando el producto")
+        })
+        .catch(function(respuesta){
+            console.log(respuesta)
+            
+        })
+
+
 }
